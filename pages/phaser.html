@@ -39,9 +39,16 @@ var bombs;
 var platforms;
 var cursors;
 var score = 0;
+var nivel = 1;
 var gameOver = false;
 var scoreText;
+var nivelText;
 var gameovertext;
+var velocidadX;
+var velocidadY;
+var velbombX;
+var velbombY;
+
 
 var game = new Phaser.Game(config);
 
@@ -52,7 +59,7 @@ function preload ()
     this.load.image('ground2', '../assets/images/phaser/platform2.png');
     this.load.image('ground3', '../assets/images/phaser/platform3.png');
     this.load.image('star', '../assets/images/phaser/star.png');
-    this.load.image('star2', '../assets/images/phaser/star2.png');
+    this.load.image('redstar', '../assets/images/phaser/star2.png');
     this.load.image('bomb', '../assets/images/phaser/bomb.png');
     this.load.spritesheet('dude', '../assets/images/phaser/dude.png', { frameWidth: 32, frameHeight: 48 });
 }
@@ -73,7 +80,7 @@ function create ()
 
     
     platforms.create(340, 320, 'ground2');
-    platforms.create(600, 300, 'ground3');
+    platforms.create(610, 300, 'ground3');
 
 
     platforms.create(500, 130, 'ground3');
@@ -131,7 +138,8 @@ function create ()
     //estrella roja
 
     redstar = this.physics.add.group({
-        key: "star2"
+        key: "redstar"
+        
         
     });
 
@@ -145,6 +153,7 @@ function create ()
 
     //texto
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    nivelText = this.add.text(16, 58, 'nivel: 1', { fontSize: '32px', fill: '#000' });
 
     
     this.physics.add.collider(player, platforms);
@@ -165,19 +174,21 @@ function update ()
 {
     if (gameOver)
     {
-        return;g
+        return;
         gameovertext = this.add.text(400, 400, 'Game Over', { fontSize: '32px', fill: '#000' });
     }
 
     if (cursors.left.isDown)
     {
-        player.setVelocityX(-160);
+        velocidadX = -160
+        player.setVelocityX(velocidadX);
 
         player.anims.play('left', true);
     }
     else if (cursors.right.isDown)
     {
-        player.setVelocityX(160);
+        velocidadY = 160
+        player.setVelocityX(velocidadY);
 
         player.anims.play('right', true);
     }
@@ -200,15 +211,21 @@ function collectStar2 (player, redstar)
 {
     redstar.disableBody(true, true);
 
-    score += 20;
+    score += 50;
     scoreText.setText('Score: ' + score);
 
-    player.setVelocityX(x + 10)
-    player.setVelocityY(x - 10)
+    velocidadY += 100;
+    velocidadX += 100;
+
+    
 
 }
 
 //funcion estrella
+
+velbombX = -100
+velbombY = 100
+
 
 function collectStar (player, star)
 {
@@ -217,9 +234,17 @@ function collectStar (player, star)
     
     score += 10;
     scoreText.setText('Score: ' + score);
+    
+    
+    velbombX = velbombX - 5;
+    velbombY = velbombY + 5;
 
-    if (stars.countActive(true) === 0)
+    if (stars.countActive(true) === 0 && (redstar.countActive(true) === 0))
     {
+        
+        nivel += 1;
+        nivelText.setText('Nivel: ' + nivel)
+        
         stars.children.iterate(function (child) {
 
             child.enableBody(true, child.x, 0, true, true);
@@ -241,12 +266,16 @@ function collectStar (player, star)
         var bomb = bombs.create(x, 16, 'bomb');
         bomb.setBounce(1);
         bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.setVelocityX(velbombX)
+        bomb.setVelocityY(velbombY);
         bomb.allowGravity = false;
 
         
 
     }
+
+
+    
 }
 
 function hitBomb (player, bomb)
