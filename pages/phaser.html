@@ -40,14 +40,15 @@ var platforms;
 var cursors;
 var score = 0;
 var nivel = 1;
-var gameOver = false;
+var gameOver = true;
 var scoreText;
 var nivelText;
 var gameovertext;
-var velocidadX;
-var velocidadY;
-var velbombX;
-var velbombY;
+var gameovertext2;
+var velocidadX = -160;
+var velocidadY = 160;
+var velbombX = -100;
+var velbombY = 100;
 
 
 var game = new Phaser.Game(config);
@@ -152,8 +153,8 @@ function create ()
 
 
     //texto
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-    nivelText = this.add.text(16, 58, 'nivel: 1', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#D9120C' });
+    nivelText = this.add.text(16, 58, 'nivel: 1', { fontSize: '32px', fill: '#D9120C' });
 
     
     this.physics.add.collider(player, platforms);
@@ -174,20 +175,28 @@ function update ()
 {
     if (gameOver)
     {
-        return;
-        gameovertext = this.add.text(400, 400, 'Game Over', { fontSize: '32px', fill: '#000' });
+        
+        gameovertext = this.add.text(180, 200, 'Game Over', { fontSize: '78px', fill: '#D9120C' });
+        gameovertext2 = this.add.text(200, 380, 'Apreta enter para reiniciar', { fontSize: '24px', fill: '#D9120C' });
+
+        if (cursors.space.isDown) {
+
+            restart.game
+
+        }
+
     }
 
     if (cursors.left.isDown)
     {
-        velocidadX = -160
+        
         player.setVelocityX(velocidadX);
 
         player.anims.play('left', true);
     }
     else if (cursors.right.isDown)
     {
-        velocidadY = 160
+        
         player.setVelocityX(velocidadY);
 
         player.anims.play('right', true);
@@ -214,8 +223,11 @@ function collectStar2 (player, redstar)
     score += 50;
     scoreText.setText('Score: ' + score);
 
-    velocidadY += 100;
-    velocidadX += 100;
+
+    //velocidad personaje al agarrar estrella
+
+    velocidadY = velocidadY + 20;
+    velocidadX = velocidadX - 20;
 
     
 
@@ -223,8 +235,7 @@ function collectStar2 (player, redstar)
 
 //funcion estrella
 
-velbombX = -100
-velbombY = 100
+
 
 
 function collectStar (player, star)
