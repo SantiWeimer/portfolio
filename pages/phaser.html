@@ -56,9 +56,10 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.image('sky', '../assets/images/phaser/sky.png');
-    this.load.image('ground', '../assets/images/phaser/platform.png');
-    this.load.image('ground2', '../assets/images/phaser/platform2.png');
-    this.load.image('ground3', '../assets/images/phaser/platform3.png');
+    this.load.image('ground', '../assets/images/phaser/plataforma.png');
+    this.load.image('base', '../assets/images/phaser/base.png');
+    this.load.image('ground2', '../assets/images/phaser/plataforma2.png');
+    this.load.image('ground3', '../assets/images/phaser/plataforma3.png');
     this.load.image('star', '../assets/images/phaser/star.png');
     this.load.image('redstar', '../assets/images/phaser/star2.png');
     this.load.image('bomb', '../assets/images/phaser/bomb.png');
@@ -74,7 +75,7 @@ function create ()
     platforms = this.physics.add.staticGroup();
 
   
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(400, 568, 'base').setScale(2).refreshBody();
 
     platforms.create(70, 440, 'ground2');
     platforms.create(700, 450, 'ground');
@@ -87,7 +88,10 @@ function create ()
     platforms.create(500, 130, 'ground3');
     
     platforms.create(30, 220, 'ground3');
-    platforms.create(800, 200, 'ground3');
+    platforms.create(850, 200, 'ground2');
+
+    platforms.create(30, 100, 'ground3');
+
 
    
     player = this.physics.add.sprite(100, 450, 'dude');
@@ -122,7 +126,7 @@ function create ()
     stars = this.physics.add.group({
         key: 'star',
         repeat: 10,
-        setXY: { x: 12, y: 0, stepX: 70 }
+        setXY: { x: 100, y: 0, stepX: 68 }
     });
 
     stars.children.iterate(function (child) {
@@ -153,8 +157,8 @@ function create ()
 
 
     //texto
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#D9120C' });
-    nivelText = this.add.text(16, 58, 'nivel: 1', { fontSize: '32px', fill: '#D9120C' });
+    scoreText = this.add.text(560, 16, 'Puntos: 0', { fontSize: '32px', fill: '#D9120C' });
+    nivelText = this.add.text(16, 16, 'Nivel: 1', { fontSize: '32px', fill: '#D9120C' });
 
     
     this.physics.add.collider(player, platforms);
@@ -244,13 +248,13 @@ function collectStar (player, star)
 
     
     score += 10;
-    scoreText.setText('Score: ' + score);
+    scoreText.setText('Puntos: ' + score);
     
     
     velbombX = velbombX - 5;
     velbombY = velbombY + 5;
 
-    if (stars.countActive(true) === 0 && (redstar.countActive(true) === 0))
+    if (stars.countActive(true) === 0 && (redstar.countActive(true) === 0) || stars.countActive(true) === 0)
     {
         
         nivel += 1;
