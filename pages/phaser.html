@@ -40,7 +40,7 @@ var platforms;
 var cursors;
 var score = 0;
 var nivel = 1;
-var gameOver = true;
+var gameOver = false;
 var scoreText;
 var nivelText;
 var gameovertext;
@@ -181,11 +181,11 @@ function update ()
     {
         
         gameovertext = this.add.text(180, 200, 'Game Over', { fontSize: '78px', fill: '#D9120C' });
-        gameovertext2 = this.add.text(200, 380, 'Apreta enter para reiniciar', { fontSize: '24px', fill: '#D9120C' });
+        gameovertext2 = this.add.text(200, 380, 'Apreta espacio para reiniciar', { fontSize: '24px', fill: '#D9120C' });
 
         if (cursors.space.isDown) {
 
-            restart.game
+            document.location.reload();
 
         }
 
