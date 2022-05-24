@@ -21,7 +21,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400 },
+            gravity: { y: 410 },
             debug: false
         }
     },
@@ -58,12 +58,13 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.image('sky', '../assets/images/phaser/sky.png');
+    this.load.image('gameover', '../assets/images/phaser/gameover.png');
     this.load.image('ground', '../assets/images/phaser/plataforma.png');
     this.load.image('base', '../assets/images/phaser/base.png');
     this.load.image('ground2', '../assets/images/phaser/plataforma2.png');
     this.load.image('ground3', '../assets/images/phaser/plataforma3.png');
-    this.load.image('star', '../assets/images/phaser/star.png');
-    this.load.image('redstar', '../assets/images/phaser/star2.png');
+    this.load.image('star', '../assets/images/phaser/moneda.png');
+    this.load.image('redstar', '../assets/images/phaser/anillo.png');
     this.load.image('bomb', '../assets/images/phaser/bomb.png');
     this.load.spritesheet('dude', '../assets/images/phaser/dude.png', { frameWidth: 32, frameHeight: 48 });
     this.load.audio('musica', '../assets/sounds/musica.mp3');
@@ -184,6 +185,8 @@ function create ()
     this.physics.add.collider(player, bombs, hitBomb, null, this);
     
 
+    
+
 }
 
 function update ()
@@ -242,7 +245,7 @@ function collectStar2 (player, redstar)
     redstar.disableBody(true, true);
 
     score += 50;
-    scoreText.setText('Score: ' + score);
+    scoreText.setText('Puntos: ' + score);
     moneda.play()
 
 
