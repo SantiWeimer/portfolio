@@ -49,6 +49,8 @@ var velocidadX = -160;
 var velocidadY = 160;
 var velbombX = -100;
 var velbombY = 100;
+var musica = false;
+var moneda;
 
 
 var game = new Phaser.Game(config);
@@ -64,11 +66,18 @@ function preload ()
     this.load.image('redstar', '../assets/images/phaser/star2.png');
     this.load.image('bomb', '../assets/images/phaser/bomb.png');
     this.load.spritesheet('dude', '../assets/images/phaser/dude.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.audio('musica', '../assets/sounds/musica.mp3');
+    this.load.audio('moneda', '../assets/sounds/moneda.mp3');
 }
 
 function create ()
 {
     
+    musica = this.sound.add('musica');
+    musica.play()
+    moneda = this.sound.add('moneda');
+    
+
     this.add.image(400, 300, 'sky');
 
     
@@ -146,6 +155,7 @@ function create ()
         key: "redstar"
         
         
+        
     });
 
     redstar.children.iterate(function (child) {
@@ -157,8 +167,9 @@ function create ()
 
 
     //texto
-    scoreText = this.add.text(560, 16, 'Puntos: 0', { fontSize: '32px', fill: '#D9120C' });
-    nivelText = this.add.text(16, 16, 'Nivel: 1', { fontSize: '32px', fill: '#D9120C' });
+    scoreText = this.add.text(560, 16, 'Puntos: 0', { fontFamily: 'Times', fontStyle: 'italic', fontSize: '32px', fill: '#D9120C' });
+    nivelText = this.add.text(16, 16, 'Nivel: 1', { fontFamily: 'Times', fontStyle: 'italic', fontSize: '32px', fill: '#D9120C' });
+
 
     
     this.physics.add.collider(player, platforms);
@@ -171,6 +182,7 @@ function create ()
     this.physics.add.overlap(player, redstar, collectStar2, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+    
 
 }
 
@@ -180,12 +192,14 @@ function update ()
     if (gameOver)
     {
         
-        gameovertext = this.add.text(180, 200, 'Game Over', { fontSize: '78px', fill: '#D9120C' });
-        gameovertext2 = this.add.text(200, 380, 'Apreta espacio para reiniciar', { fontSize: '24px', fill: '#D9120C' });
-
+        gameovertext = this.add.text(190, 190, 'Game Over', { fontFamily: 'Times', fontStyle: 'italic', fontSize: '78px', fill: '#D9120C' });
+        gameovertext2 = this.add.text(230, 370, 'Apreta espacio para reiniciar', { fontFamily: 'Times', fontStyle: 'italic', fontSize: '24px', fill: '#D9120C' });
+        
+        
         if (cursors.space.isDown) {
 
             document.location.reload();
+            
 
         }
 
@@ -201,6 +215,9 @@ function update ()
     else if (cursors.right.isDown)
     {
         
+        musica = true;
+        
+
         player.setVelocityX(velocidadY);
 
         player.anims.play('right', true);
@@ -226,6 +243,7 @@ function collectStar2 (player, redstar)
 
     score += 50;
     scoreText.setText('Score: ' + score);
+    moneda.play()
 
 
     //velocidad personaje al agarrar estrella
@@ -249,6 +267,7 @@ function collectStar (player, star)
     
     score += 10;
     scoreText.setText('Puntos: ' + score);
+    moneda.play()
     
     
     velbombX = velbombX - 5;
@@ -303,6 +322,7 @@ function hitBomb (player, bomb)
     player.anims.play('turn');
 
     gameOver = true;
+    
    
 }
 
