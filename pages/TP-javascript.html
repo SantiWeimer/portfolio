@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios js</title>
+    <script src="../assets/js/functions.js"></script>
+</head>
+<body>
+    
+
+<h1>Ejercicios javascript</h1>
+
+
+<h3>Ejercicio 1</h3>
+
+<p>Ingrese tres numeros para saber cual es el mayor</p>
+
+<label for="ej1_c1">Numero 1</label>
+<input type="number" id="ej1_c1">
+
+<label for="ej1_c2">Numero 2</label>
+<input type="number" id="ej1_c2">
+
+<label for="ej1_c3">Numero 3</label>
+<input type="number" id="ej1_c3">
+
+<button onclick="func_ej1()">Comparar</button>
+
+<label for="ej1_resultado">Resultado</label>
+<input type="text" id="ej1_resultado">
+
+
+
+
+<h3>Ejercicio 2</h3>
+
+<p>Ingrese dos numeros para sumarlos</p>
+
+<label for="ej2_c1">Numero 1</label>
+<input type="number" id="ej2_c1">
+
+<label for="ej2_c2">Numero 2</label>
+<input type="number" id="ej2_c2">
+
+<button onclick="func_ej2()">Sumar</button>
+
+<label for="ej2_resultado">Resultado</label>
+<input type="text" id="ej2_resultado">
+
+
+
+<h3>Ejercicio 3</h3>
+
+<p>Ingrese una palabra y un numero que indique cuantas veces quiere repetir la palabra</p>
+
+
+<label for="ej3_c1">Palabra</label>
+<input type="text" id="ej3_c1">
+
+<label for="ej3_c2">Numero de repeticiones</label>
+<input type="number" id="ej3_c2">
+
+<button onclick="func_ej3()">Repetir</button>
+
+<label for="ej3_resultado">Resultado</label>
+<input type="text" id="ej2_resultado">
+
+
+
+<h3>Ejercicio 4</h3>
+
+<p>Ingrese cuantos grados Celsius quiere convertir a Fareheint</p>
+<label for="ej4_c2">Grados celsius</label>
+<input type="number" id="ej4_c1">
+
+<button onclick="func_ej4()">Convertir</button>
+
+<label for="ej4_resultado">Resultado</label> 
+<input type="text" id="ej4_resultado">
+
+
+
+<h3>Ejercicio 5</h3>
+
+<p>Ingrese una palabra para saber cuantas letras tiene</p>
+
+<label for="ej5_c1">Palabra</label>
+<input type="text" id="ej5_c1">
+
+<button onclick="func_ej5()">Convertir</button>
+
+<label for="ej5_resultado">Resultado</label> 
+<input type="text" id="ej5_resultado">
+
+
+
+<h3>Ejercicio 6</h3>
+
+<p>Ingrese un numero para saber si es par o impar</p>
+
+<label for="ej6_c1">Numero</label>
+<input type="text" id="ej6_c1">
+
+
+
+<h3>Ejercicio 7</h3>
+
+<p>Ingrese dos números para ver los múltiplos de 3 comprendidos entre ambos</p>
+
+<label for="ej7_c1">Numero 1</label>
+<input type="text" id="ej7_c1">
+
+<label for="ej7_c2">Numero 2</label>
+<input type="text" id="ej7_c2">
+
+
+
+
+
+<script>
+
+   //Formula para ejercicio 1
+
+   function func_ej1(){
+
+    let ej1_c1 = (document.getElementById('ej2_c1').value);
+    let ej1_c2 = (document.getElementById('ej2_c2').value);
+    let ej1_c3 = (document.getElementById('ej2_c3').value);
+
+    var valor = document.getElementById('ej1_resultado').value;
+
+    if (ej1_c1 > ej1_c2 && ej1_c1 > ej1_c3){
+
+        valor = 'numero 1'
+        
+    }else if (ej1_c2 > ej1_c1 && ej1_c2 > ej1_c3){
+
+        valor = 'numero 1'
+      
+    }else{
+        valor = 'numero 1'
+      
+    }
+   }
+   
+
+   //Formula para ejercicio 2
+
+   function func_ej2(){
+
+    let ej2_c1 = parseFloat(document.getElementById('ej2_c1').value);
+    let ej2_c2 = parseFloat(document.getElementById('ej2_c2').value);
+    let suma = ""
+
+    suma = (ej2_c1 + ej2_c2);
+    
+    document.getElementById('ej2_resultado').value = suma;
+
+   }
+
+
+   //Formula para ejercicio 3
+
+   function func_ej3(){
+
+
+    let ej3_c1 = document.getElementById('ej3_c1').value;
+    let ej3_c2 = document.getElementById('ej3_c2').value;
+
+    let res_ej3 = ej3_c1 * ej3_c2;
+    document.getElementById('ej3_resultado').value = res_ej3;
+    
+   }
+
+   
+   //Formula para ejercicio 4
+   
+
+   function func_ej4(){
+
+    let ej4_c1 = parseFloat(document.getElementById('ej4_c1').value);
+
+    const res_ej4 = (ej4_c1 * 9/5) + 32;
+    document.getElementById('ej4_resultado').value = res_ej4;
+
+   }
+
+
+   function func_ej5(){
+            
+    let ej5_palabra = (document.getElementById('ej5_c1').value);
+         
+    document.getElementById('ej5_resultado').value= "La palabra " +ej5_palabra+ " tiene " +ej5_palabra.length+ " letras."; 
+        
+    }
+        
+    
+
+    function func_ej6(num) {
+                    
+    let numv = parseFloat(num.value);
+    let calc = numv % 2
+        
+    if (calc == 0) {
+       var res = "par";
+       document.getElementById("ej6_i2").value = res;
+    }else{
+        var res = "impar";
+       document.getElementById("ej6_i2").value = res;
+    }
+    }
+        
+        
+    function func_ej7(){
+        
+    let num1v= parseInt(document.getElementById('ej7_i1').value);
+    let num2v= parseInt(document.getElementById('ej7_i2').value)
+        
+    let multiplos = ""
+    let comparten = true
+    let mult = 3
+    var mod1, mod2
+        
+    while (mult <= num1v && mult <= num2v && comparten == true) {
+        
+    mod1 = num1v % mult
+    mod2 = num2v % mult
+        
+    if (mod1 === mod2){
+        
+    multiplos = multiplos + mult + ", "
+    mult = mult + 3
+        
+    }else {
+    comparten = false 
+    } 
+    }
+    document.getElementById("ej7_respuesta").value= multiplos
+        
+    }
+        
+        
+        
+    function func_ej8(num){
+        
+    let numv= parseInt(num.value);
+        
+    var primos = []
+             
+    for (let index = 0; index <= numv; index++) {
+        
+    if (esPrimo(index)) {
+                
+    primos.push(index)} 
+            
+    }
+        
+    alert (primos.toString())
+        
+    }
+        
+    function esPrimo(numero) {
+    
+    for (var i = 2; i < numero; i++) {
+          
+    if (numero % i === 0) {
+    return false;}
+    }
+          
+    return numero !== 1;
+    }
+        
+        
+    function func_ej9() {
+                
+    let nombre= document.getElementById('ej9_i1').value;
+    let apellido= document.getElementById('ej9_i2').value;
+    let edad = document.getElementById('ej9_i3').value;
+    let ciudad = document.getElementById('ej9_i4').value;
+            
+    const frase = "Mi nombre es " + nombre + " " + apellido + ", tengo " + edad + " años. Nací en la ciudad de " + ciudad + ".";
+        
+    document.getElementById("ej9_respuesta").value = frase
+    }
+        
+        
+    function func_ej10() {
+        
+    let num1= parseInt(document.getElementById('ej10_i1').value);
+    let num2= parseInt(document.getElementById('ej10_i2').value);
+    let numeros = ""
+    
+    
+    if (num1 > num2) {
+                  
+    for (let index = num1 - 1; index > num2 ; index--) {
+                      
+        numeros = numeros + index + ", ";
+    }
+
+        document.getElementById("ej10_respuesta").value = numeros
+    } 
+        
+
+    if (num2 > num1){
+        
+    for (let index = num1 + 1; num2 > index ; index++) {
+                      
+        numeros = numeros + index + ", ";;
+    }
+        document.getElementById("ej10_respuesta").value = numeros
+    }
+
+    }
+
+</script>
+</body>
+</html>
