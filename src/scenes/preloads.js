@@ -23,6 +23,10 @@ export class Preloads extends Phaser.Scene {
         this.load.spritesheet('dude', '../assets/images/phaser/dude.png', { frameWidth: 32, frameHeight: 48 });
 
 
+        //sonidos
+
+        this.load.audio("musica", "/assets/sounds/musica.mp3");
+        this.load.audio("moneda", "/assets/sounds/moneda.mp3");
     }
 
     create(){

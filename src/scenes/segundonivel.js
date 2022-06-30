@@ -9,7 +9,12 @@ export class SegundoNivel extends Phaser.Scene {
     create() {
 
       
-
+      var botonrespuesta3 = new Button(this.cameras.main.centerX, this.cameras.main.centerY, 'GameOver',
+      this, () => {
+       
+        this.scene.start('GameOver')
+       
+     });
 
     };
   
