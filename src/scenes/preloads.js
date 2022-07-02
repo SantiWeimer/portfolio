@@ -9,6 +9,9 @@ export class Preloads extends Phaser.Scene {
 
     preload(){
 
+        //tilemap
+        this.load.tilemapTiledJSON("map1", "/assets/tilemap/tilemap1.json");
+        
         //escena
         this.load.image("sky", "/assets/images/phaser/sky.png");
         this.load.image("base", "/assets/images/phaser/base.png");
@@ -25,8 +28,8 @@ export class Preloads extends Phaser.Scene {
 
         //sonidos
 
-        this.load.audio("musica", "/assets/sounds/musica.mp3");
-        this.load.audio("moneda", "/assets/sounds/moneda.mp3");
+        this.load.audio("musicafondo", "/assets/sounds/musica.mp3");
+        this.load.audio("sonidomoneda", "/assets/sounds/moneda.mp3");
     }
 
     create(){

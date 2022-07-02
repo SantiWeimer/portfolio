@@ -11,6 +11,7 @@ export class PrimerNivel extends Phaser.Scene {
     create() {
 
 var player;
+var moneda;
 var stars;
 var redstar;
 var bombs;
@@ -27,19 +28,63 @@ var velocidadX = -160;
 var velocidadY = 160;
 var velbombX = -100;
 var velbombY = 100;
-var musica = false;
-var moneda;
+var musicafondo;
+var sonidomoneda;
 
 
     
 
     //sonidos
 
-    musica = this.sound.add('musica');
-    musica.play()
-    moneda = this.sound.add('moneda');
-    
+    musicafondo = this.sound.add('musicafondo');
+    musicafondo.setVolume(0.3)
+    musicafondo.play()
+    sonidomoneda = this.sound.add('sonidomoneda');
 
+    //tilemap
+
+    const map = this.make.tilemap({ key: "map1" });
+    
+    const sky = map.addTilesetImage("sky, skyTile");
+    const base = map.addTilesetImage("base", "baseTile");
+    const plataforma1 = map.addTilesetImage("plataforma", "plataforma1Tile");
+    const plataforma2 = map.addTilesetImage("plataforma2", "plataforma2Tile");
+    const plataforma3 = map.addTilesetImage("plataforma3", "plataforma3Tile");
+    
+  
+    const skyLayer = map.createLayer("skymapa", sky, 0, 0);
+    const baseLayer = map.createLayer("basemapa", base, 0, 0);
+    const plataforma1Layer = map.createLayer("plataforma1mapa", plataforma1, 0, 0);
+    const plataforma2Layer = map.createLayer("plataforma2mapa", plataforma2, 0, 0);
+    const plataforma3Layer = map.createLayer("plataforma3mapa", plataforma3, 0, 0);
+    //objetos
+    const playerLayer = map.getObjectLayer("player");
+    const monedaLayer = map.getObjectLayer("moneda");
+    const anilloLayer = map.getObjectLayer("anillo");
+
+
+    const spawnPlayer = map.findObject("player",
+    (obj) => obj.name === "dude");
+
+    console.log(spawnPlayer)
+    const spawnAnillo = map.findObject("anillo",
+    (obj) => obj.name === "anillo");
+
+    //personaje
+   
+    player = this.physics.add.sprite(spawnPlayer.x, spawnPlayer.y, 'dude');
+
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+     /*
+    baseLayer.setCollisionByProperty({ collides: true });
+    plataforma1Layer.setCollisionByProperty({ collides: true });
+    plataforma2Layer.setCollisionByProperty({ collides: true });
+    plataforma3Layer.setCollisionByProperty({ collides: true });
+    */
+
+ /*
     //fondo
     this.add.image(400, 300, 'sky');
 
@@ -66,7 +111,7 @@ var moneda;
 
     platforms.create(30, 100, 'plataforma3');
 
-
+*/
 
     //personaje
    
@@ -108,9 +153,6 @@ var moneda;
     else if (cursors.right.isDown)
     {
         
-        musica = true;
-        
-
         player.setVelocityX(velocidadY);
 
         player.anims.play('right', true);
@@ -175,18 +217,35 @@ var moneda;
     nivelText = this.add.text(16, 16, 'Nivel: 1', { fontFamily: 'Times', fontStyle: 'italic', fontSize: '32px', fill: '#D9120C' });
 
 
+    //colisiones
     
-    this.physics.add.collider(player, platforms);
-    this.physics.add.collider(stars, platforms);
-    this.physics.add.collider(redstar, platforms);
-    this.physics.add.collider(bombs, platforms);
+    this.physics.add.collider(player, baseLayer);
+    this.physics.add.collider(player, plataforma1Layer);
+    this.physics.add.collider(player, plataforma2Layer);
+    this.physics.add.collider(player, plataforma3Layer);
+
+    this.physics.add.collider(stars, baseLayer);
+    this.physics.add.collider(stars, plataforma1Layer);
+    this.physics.add.collider(stars, plataforma2Layer);
+    this.physics.add.collider(stars, plataforma3Layer);
+
+    this.physics.add.collider(redstar, baseLayer);
+    this.physics.add.collider(redstar, plataforma1Layer);
+    this.physics.add.collider(redstar, plataforma2Layer);
+    this.physics.add.collider(redstar, plataforma3Layer);
+
+    this.physics.add.collider(bombs, baseLayer);
+    this.physics.add.collider(bombs, plataforma1Layer);
+    this.physics.add.collider(bombs, plataforma2Layer);
+    this.physics.add.collider(bombs, plataforma3Layer);
 
     
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.overlap(player, redstar, collectStar2, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
-    
+
+
 
     
     //funcion estrella roja
