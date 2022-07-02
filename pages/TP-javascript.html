@@ -131,7 +131,7 @@
 <label for="ej8_c1">Ingresar numero</label>
 <input type="text" id="ej8_c1">
 
-<button onclick="func_ej8()">Ver</button>
+<button onclick="func_ej8()">Mostrar</button>
 
 <label for="ej8_resultado">Resultado</label>
 <input type="text" id="ej8_resultado">
@@ -221,23 +221,19 @@
 
    //Formula para ejercicio 3
 
-   //arreglar
-
    function func_ej3(){
 
+    let ej3_c1 = (document.getElementById("ej3_c1").value);
+    let ej3_c2 = parseFloat(document.getElementById("ej3_c2").value);
+    repetir = ""
+    for (x = 0; x < ej3_c2; x++){
+    
+        repetir = repetir + ej3_c1
+}
 
-    var  ej2_c1 = document.getElementById("ej2_c1").value;
-    var  ej2_c2 = parseInt(document.getElementById("ej2_c2").value);
-    var suma;
+document.getElementById("ej3_resultado").value = repetir
 
-    for (let index = 1; index <= ej2_c2; index++) {
-        
-        suma = suma + ej2_c1
-    }
-
-    document.getElementById("ej3_resultado").value = suma
-
-   }
+}
 
    
    //Formula para ejercicio 4
@@ -281,70 +277,67 @@
     
 
     //Formula para ejercicio 7
-
-    //arreglar
         
     function func_ej7(){
         
-    var num1 = parseInt(document.getElementById('ej7_c1').value);
-    var num2 = parseInt(document.getElementById('ej7_c2').value);
-        
-    var multiplos;
-    var comparten = true;
-    var mult = 3;
-    var mod1, mod2;
-        
-    while (mult <= num1 && mult <= num2 && comparten == true) {
-        
-    mod1 = num1 % mult
-    mod2 = num2 % mult
-        
-    if (mod1 === mod2){
-        
-    multiplos = multiplos + mult + ", "
-    mult = mult + 3
-        
+    var ej7_c1= parseInt(document.getElementById('ej7_c1').value); 
+    var ej7_c2= parseInt(document.getElementById('ej7_c2').value);
+
+    var mult = ""
+    var comparten = true
+    var multiplos = 3
+    var modulo1, modulo2
+
+    while (multiplos <= ej7_c1 && multiplos <= ej7_c2 && comparten == true) {
+     
+        modulo1 = ej7_c1%multiplos 
+        modulo1 = ej7_c2%multiplos 
+
+    if (modulo1 == modulo2) {
+        mult = mult + multiplos + ","
+
+        multiplos = multiplos + 3
+
     }else {
-    comparten = false 
-    } 
+         comparten = false
+       }
     }
-    document.getElementById("ej7_resultado").value = multiplos
-        
+
+     document.getElementById("ej7_resultado").value= multiplos
     }
         
     
     
     //Formula para ejercicio 8
-
-    //arreglar    
+   
     function func_ej8(){
-        
-    var numv= parseInt(document.getElementById("ej8_c1").value);
-    var resultado = document.getElementById("ej8_resultado").value;    
-    var primos = []
-             
-    for (let index = 0; index <= numv; index++) {
-        
-    if (esPrimo(index)) {
-                
-    primos.push(index)} 
-            
-    }
-        
-    resultado = (primos.toString())
-        
-    }
-        
-    function esPrimo(numero) {
+    let ej8_c1 = parseFloat(document.getElementById("ej8_c1").value);
     
-    for (var i = 2; i < numero; i++) {
-          
-    if (numero % i === 0) {
-    return false;}
+    function esPrimo(numero){
+        let divisores = 0;
+        for(let i=2; i <= numero; i++) {        
+            if(numero % i === 0) {
+                divisores += 1;                    
+            }
+        }
+        if(divisores===1){
+            return true
+        }else{
+            return false
+        }
     }
-          
-    return numero !== 1;
+
+    var Primo = [];
+
+    for(let i=0; i <= ej8_c1; i++){
+        console.log("i es " + i)
+        if (esPrimo(i)){
+            Primo.push(i);
+        }
     }
+
+    document.getElementById("ej8_resultado").value = Primo.toString();
+}
         
     //Formula para ejercicio 9
 
@@ -358,7 +351,7 @@
     var oracion = "Mi nombre es " + nombre + " " + apellido + ", tengo " + edad + " años. Nací en la ciudad de " + ciudad + ".";
         
     document.getElementById("ej9_resultado").value = oracion
-    }
+    };
     
     
 
