@@ -9,6 +9,9 @@ export class MainMenu extends Phaser.Scene {
 
     create(){
 
+      musica = this.sound.add('musica');
+      musica.play()
+
       var botonrespuesta3 = new Button(this.cameras.main.centerX, this.cameras.main.centerY, 'Jugar',
       this, () => {
        
