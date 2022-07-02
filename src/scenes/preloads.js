@@ -15,7 +15,7 @@ export class Preloads extends Phaser.Scene {
         //escena
         this.load.image("sky", "/assets/images/phaser/sky.png");
         this.load.image("base", "/assets/images/phaser/base.png");
-        this.load.image("plataforma", "/assets/images/phaser/plataforma.png");
+        this.load.image("plataforma1", "/assets/images/phaser/plataforma.png");
         this.load.image("plataforma2", "/assets/images/phaser/plataforma2.png");
         this.load.image("plataforma3", "/assets/images/phaser/plataforma3.png");
         //objetos

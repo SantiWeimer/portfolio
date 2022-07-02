@@ -72,19 +72,11 @@ var sonidomoneda;
 
     //personaje
    
-    player = this.physics.add.sprite(spawnPlayer.x, spawnPlayer.y, 'dude');
+    player = this.physics.add.sprite(100, 450, 'dude');
 
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
-     /*
-    baseLayer.setCollisionByProperty({ collides: true });
-    plataforma1Layer.setCollisionByProperty({ collides: true });
-    plataforma2Layer.setCollisionByProperty({ collides: true });
-    plataforma3Layer.setCollisionByProperty({ collides: true });
-    */
-
- /*
     //fondo
     this.add.image(400, 300, 'sky');
 
@@ -111,7 +103,7 @@ var sonidomoneda;
 
     platforms.create(30, 100, 'plataforma3');
 
-*/
+
 
     //personaje
    
@@ -141,7 +133,9 @@ var sonidomoneda;
         repeat: -1
     });
 
-    cursors = this.input.keyboard.createCursorKeys();
+    if ((cursors = !undefined)) {
+        cursors = this.input.keyboard.createCursorKeys();
+      }
 
     if (cursors.left.isDown)
     {
@@ -219,25 +213,11 @@ var sonidomoneda;
 
     //colisiones
     
-    this.physics.add.collider(player, baseLayer);
-    this.physics.add.collider(player, plataforma1Layer);
-    this.physics.add.collider(player, plataforma2Layer);
-    this.physics.add.collider(player, plataforma3Layer);
-
-    this.physics.add.collider(stars, baseLayer);
-    this.physics.add.collider(stars, plataforma1Layer);
-    this.physics.add.collider(stars, plataforma2Layer);
-    this.physics.add.collider(stars, plataforma3Layer);
-
-    this.physics.add.collider(redstar, baseLayer);
-    this.physics.add.collider(redstar, plataforma1Layer);
-    this.physics.add.collider(redstar, plataforma2Layer);
-    this.physics.add.collider(redstar, plataforma3Layer);
-
-    this.physics.add.collider(bombs, baseLayer);
-    this.physics.add.collider(bombs, plataforma1Layer);
-    this.physics.add.collider(bombs, plataforma2Layer);
-    this.physics.add.collider(bombs, plataforma3Layer);
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.collider(redstar, platforms);
+    this.physics.add.collider(bombs, platforms);
+  
 
     
     this.physics.add.overlap(player, stars, collectStar, null, this);

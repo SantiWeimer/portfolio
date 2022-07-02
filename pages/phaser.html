@@ -153,11 +153,10 @@ function create ()
     //estrella roja
 
     redstar = this.physics.add.group({
-        key: "redstar"
-        
-        
-        
-    });
+    key: 'redstar',
+    repeat: 0,
+    setXY: { x: 50, y: 0, }
+    } );
 
     redstar.children.iterate(function (child) {
 
